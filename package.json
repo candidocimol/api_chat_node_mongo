@@ -1,0 +1,24 @@
+{
+  "name": "chat-api",
+  "version": "1.0.0",
+  "description": "API chat mensagens instantâneas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "api",
+    "mongo",
+    "salas"
+  ],
+  "author": "Cândido Farias",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^5.4.0"
+  }
+}
