@@ -1,4 +1,7 @@
 const express = require('express');
+const cors = require('cors');
+app.use(cors());
+
 const token = require('./util/token');
 const salaController = require("./controllers/salaController");
 const usuarioController = require("./controllers/usuarioController");
