@@ -41,6 +41,10 @@ exports.buscarMensagens = async (idsala, timestamp)=>{
 	};
 }  
 
+exports.criarSala = async (nomeSala, iduser, nick)=>{
+	return await salaModel.criarSala(nomeSala, iduser, nick);
+}
+
 exports.sairSala= async (idsala, iduser)=>{
 	let user= await usuarioModel.buscarUsuario(iduser);
 	let resp= await this.enviarMensagem(user.nick, "Sai da sala!",idsala);

@@ -5,6 +5,17 @@ let listarSalas = async ()=>{
 		return salas;
 };
 
+let criarSala = async(nomeSala, iduser, nick)=>{
+	const novaSala={
+		nome: nomeSala,
+		iduser: iduser,
+		nick: nick,
+	};
+	let resp =  db.insertOne('salas', novaSala);
+	console.log(resp);
+        
+}
+
 let buscarSala = async (idsala)=>{
 	return db.findOne("salas",idsala);
 }
@@ -26,4 +37,4 @@ let buscarMensagens = async (idsala, timestamp)=>{
 		}
 		return [];
 }
-module.exports = {listarSalas, buscarSala, atualizarMensagens, buscarMensagens};
+module.exports = {listarSalas, buscarSala, atualizarMensagens, buscarMensagens, criarSala};
