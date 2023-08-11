@@ -5,10 +5,10 @@ exports.get= async (req, res) => {
 	return await salaModel.listarSalas();
 }
 
-exports.entrar= async (iduser,idsala)=>{
+exports.entrar= async (idUser,idsala)=>{
 	const sala = await salaModel.buscarSala(idsala);
 	
-	let user= await usuarioModel.buscarUsuario(iduser);
+	let user= await usuarioModel.buscarUsuario(idUser);
 	user.sala={_id:sala._id, nome:sala.nome, tipo:sala.tipo};
 	if(await usuarioModel.alterarUsuario(user)){
 		return {msg:"OK", timestamp:timestamp=Date.now()};
@@ -41,17 +41,18 @@ exports.buscarMensagens = async (idsala, timestamp)=>{
 	};
 }  
 
-exports.criarSala = async (nomeSala, iduser, nick)=>{
-	return await salaModel.criarSala(nomeSala, iduser, nick);
+exports.criarSala = async (nomeSala)=>{
+	user= await usuarioModel.buscarUsuario(idUser);
+	return await salaModel.criarSala(nomeSala, user , user.nick);
 }
 
-exports.sairSala= async (idsala, iduser)=>{
-	let user= await usuarioModel.buscarUsuario(iduser);
+exports.sairSala= async (idsala, idUser)=>{
+	let user= await usuarioModel.buscarUsuario(idUser);
 	let resp= await this.enviarMensagem(user.nick, "Sai da sala!",idsala);
 	delete user.sala;
 	console.log(user);
 	if(await usuarioModel.alterarUsuario(user)){
-		user= await usuarioModel.buscarUsuario(iduser);
+		user= await usuarioModel.buscarUsuario(idUser);
 		console.log(user);
 		return {msg:"OK", timestamp:timestamp=Date.now()};
 	}
