@@ -6,7 +6,9 @@ const token = require('./util/token');
 const salaController = require("./controllers/salaController");
 const usuarioController = require("./controllers/usuarioController");
 const app = express();
-app.use(cors());
+app.use(cors({
+	origin: 'http://localhost:3000';
+}));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
