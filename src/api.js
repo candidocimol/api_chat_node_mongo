@@ -7,9 +7,6 @@ const salaController = require("./controllers/salaController");
 const usuarioController = require("./controllers/usuarioController");
 const app = express();
 app.use(cors());
-app.listen(5000, () => {
-  console.log('Servidor API iniciado na porta 5000');
-});
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
