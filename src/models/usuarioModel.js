@@ -1,4 +1,4 @@
-const db = require("./db").default;
+const db = require("./db");
 let registrarUsuario = async (nick)=>{
 	let user= await db.insertOne("usuarios", {"nick":nick});
 	return user;
