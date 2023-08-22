@@ -4,8 +4,8 @@ let registrarUsuario = async (nick)=>{
 	return user;
 };
 
-let buscarUsuario = async (idUser)=>{
-	let user = await db.findOne("usuarios",idUser);
+let buscarUsuario = async (iduser)=>{
+	let user = await db.findOne("usuarios",iduser);
 	return user;
 }
 

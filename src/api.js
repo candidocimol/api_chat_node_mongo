@@ -1,15 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 
-
 const token = require('./util/token');
 const salaController = require("./controllers/salaController");
 const usuarioController = require("./controllers/usuarioController");
 const app = express();
 app.use(cors());
-app.listen(5000, () => {
-  console.log('Servidor API iniciado na porta 5000');
-});
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
@@ -32,11 +28,10 @@ app.use('/entrar', router.post('/entrar', async (req, res, next) => {
 	
 	let resp = await usuarioController.entrar(req.body.nick);
 	res.status(200).send(resp);
-	console.log(resp);
 }))
 
 app.use('/criarSala', router.post ('/criarSala', async (req, res) => {
-	if(await token.checkToken(req.headers.token,req.headers.idUser,req.headers.nick)) {
+	if(await token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) {
 		let resp = await salaController.criarSala(req.body.nomeSala);
 		res.status(200).send(resp);
 	}else{
@@ -45,8 +40,8 @@ app.use('/criarSala', router.post ('/criarSala', async (req, res) => {
 
 }));
 
-app.use('/salas',router.get('/salas', async (req, res,next) => {
-		if(await token.checkToken(req.headers.token,req.headers.idUser,req.headers.nick)) {
+app.use('/salas',router.get('/salas', async (req, res, next) => {
+		if(await token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) {
 		let resp= await salaController.get();
 		res.status(200).send(resp);
 	}else{
@@ -55,8 +50,8 @@ app.use('/salas',router.get('/salas', async (req, res,next) => {
 }))
 
 app.use('/sala/entrar', router.put('/sala/entrar', async (req, res)=>{
-	if(!token.checkToken(req.headers.token,req.headers.idUser,req.headers.nick)) return false;
-	let resp= await salaController.entrar(req.headers.idUser, req.query.idsala);
+	if(!token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) return false;
+	let resp= await salaController.entrar(req.headers.iduser, req.query.idsala);
 	res.status(200).send(resp);
 }))
 
@@ -67,14 +62,14 @@ app.use('/sala/mensagem/', router.post('/sala/mensagem', async (req, res) => {
 }))
 
 app.use('/sala/mensagens/', router.get('/sala/mensagens', async (req, res) => {
-	if(!token.checkToken(req.headers.token,req.headers.idUser,req.headers.nick)) return false;
+	if(!token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) return false;
 	let resp= await salaController.buscarMensagens(req.query.idSala, req.query.timestamp);
 	res.status(200).send(resp);
 }))
 
 app.use('/sala/sair/', router.put('/sala/sair', async (req, res) => {
-	if(!token.checkToken(req.headers.token,req.headers.idUser,req.headers.nick)) return false;
-	let resp= await salaController.sairSala(req.query.idsala, req.headers.idUser);
+	if(!token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) return false;
+	let resp= await salaController.sairSala(req.query.idsala, req.headers.iduser);
 	res.status(200).send(resp);
 }))
 

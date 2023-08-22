@@ -5,10 +5,10 @@ exports.get= async (req, res) => {
 	return await salaModel.listarSalas();
 }
 
-exports.entrar= async (idUser,idsala)=>{
+exports.entrar= async (iduser,idsala)=>{
 	const sala = await salaModel.buscarSala(idsala);
 	
-	let user= await usuarioModel.buscarUsuario(idUser);
+	let user= await usuarioModel.buscarUsuario(iduser);
 	user.sala={_id:sala._id, nome:sala.nome, tipo:sala.tipo};
 	if(await usuarioModel.alterarUsuario(user)){
 		return {msg:"OK", timestamp:timestamp=Date.now()};
@@ -46,13 +46,13 @@ exports.criarSala = async (nomeSala)=>{
 	return await salaModel.criarSala(nomeSala, user , user.nick);
 }
 
-exports.sairSala= async (idsala, idUser)=>{
-	let user= await usuarioModel.buscarUsuario(idUser);
+exports.sairSala= async (idsala, iduser)=>{
+	let user= await usuarioModel.buscarUsuario(iduser);
 	let resp= await this.enviarMensagem(user.nick, "Sai da sala!",idsala);
 	delete user.sala;
 	console.log(user);
 	if(await usuarioModel.alterarUsuario(user)){
-		user= await usuarioModel.buscarUsuario(idUser);
+		user= await usuarioModel.buscarUsuario(iduser);
 		console.log(user);
 		return {msg:"OK", timestamp:timestamp=Date.now()};
 	}
