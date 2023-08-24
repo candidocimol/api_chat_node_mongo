@@ -30,9 +30,9 @@ app.use('/entrar', router.post('/entrar', async (req, res, next) => {
 	res.status(200).send(resp);
 }))
 
-app.use('/criarSala', router.post ('/criarSala', async (req, res) => {
+app.use('/sala', router.post('/sala', async (req, res) => {
 	if(await token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) {
-		let resp = await salaController.criarSala(req.body.nomeSala);
+		let resp = await salaController.criarSala(req.body.sala);
 		res.status(200).send(resp);
 	}else{
 		res.status(400).send({msg:"Erro ao criar sala"});

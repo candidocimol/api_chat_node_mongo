@@ -41,9 +41,8 @@ exports.buscarMensagens = async (idsala, timestamp)=>{
 	};
 }  
 
-exports.criarSala = async (nomeSala)=>{
-	user= await usuarioModel.buscarUsuario(idUser);
-	return await salaModel.criarSala(nomeSala, user , user.nick);
+exports.criarSala = async (nomeSala, tags, senha)=>{
+	return await salaModel.criarSala(nomeSala, tags, senha);
 }
 
 exports.sairSala= async (idsala, iduser)=>{

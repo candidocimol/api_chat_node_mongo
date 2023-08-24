@@ -5,11 +5,11 @@ let listarSalas = async ()=>{
 		return salas;
 };
 
-let criarSala = async(nomeSala, iduser, nick)=>{
+let criarSala = async(nomeSala, tags, senha)=>{
 	const novaSala={
 		nome: nomeSala,
-		iduser: iduser,
-		nick: nick,
+		tags: tags,
+		senha: senha
 	};
 	let resp =  db.insertOne('salas', novaSala);
 	console.log(resp);
