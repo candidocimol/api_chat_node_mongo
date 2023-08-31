@@ -32,7 +32,7 @@ app.use('/entrar', router.post('/entrar', async (req, res, next) => {
 
 app.use('/sala', router.post('/sala', async (req, res) => {
 	if(await token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) {
-		let resp = await salaController.criarSala(req.body.sala);
+		let resp = await salaController.criarSala(req.headers.idUser, req.body.sala);
 		res.status(200).send(resp);
 	}else{
 		res.status(400).send({msg:"Erro ao criar sala"});

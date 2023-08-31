@@ -5,15 +5,16 @@ let listarSalas = async ()=>{
 		return salas;
 };
 
-let criarSala = async(nomeSala, tags, senha)=>{
-	const novaSala={
-		nome: nomeSala,
-		tags: tags,
-		senha: senha
-	};
-	let resp =  db.insertOne('salas', novaSala);
+let criarSala = async(sala)=>{
+	
+	let resp =  await db.insertOne('salas', sala);
 	console.log(resp);
-        
+	if(resp.acknowledged ){
+		sala._id = resp.insertedId;
+	}else{
+		sala=null;
+	}
+	return sala;
 }
 
 let buscarSala = async (idsala)=>{

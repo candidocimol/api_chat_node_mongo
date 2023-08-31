@@ -41,8 +41,9 @@ exports.buscarMensagens = async (idsala, timestamp)=>{
 	};
 }  
 
-exports.criarSala = async (nomeSala, tags, senha)=>{
-	return await salaModel.criarSala(nomeSala, tags, senha);
+exports.criarSala = async (idUser, sala)=>{
+	let resp = await salaModel.criarSala(sala);
+	return resp;
 }
 
 exports.sairSala= async (idsala, iduser)=>{
