@@ -11,10 +11,10 @@ let criarSala = async(sala)=>{
 	console.log(resp);
 	if(resp.acknowledged ){
 		sala._id = resp.insertedId;
+		return sala;
 	}else{
 		sala=null;
 	}
-	return sala;
 }
 
 let buscarSala = async (idsala)=>{
